@@ -1,0 +1,173 @@
+[
+    {
+        "model": "products.product",
+        "pk": 1,
+        "fields": {
+            "category": 8,
+            "name": "Балтика 9",
+            "quantity": 20,
+            "slug": "9",
+            "description": "Выбор отечественного производителя, качество так себе, зато набухивает за одну банку. Пыво",
+            "price": "100.00",
+            "discount": "10.00",
+            "discount_price": 90,
+            "image": "products/baltika.jpg",
+            "is_active": true,
+            "delivered": "2025-03-27",
+            "energy_value": "10г 5г 20г 150ккал",
+            "weight": null
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 2,
+        "fields": {
+            "category": 9,
+            "name": "Крамбамбуля",
+            "quantity": 20,
+            "slug": "krambambulya",
+            "description": "Изысканный напиток для настоящих беларусов",
+            "price": "1500.00",
+            "discount": "15.00",
+            "discount_price": 1275,
+            "image": "products/caramba.png",
+            "is_active": true,
+            "delivered": null,
+            "energy_value": "10г 5г 20г 150ккал",
+            "weight": null
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 3,
+        "fields": {
+            "category": 6,
+            "name": "Сок \"моя семья\"",
+            "quantity": 1,
+            "slug": "sok-moya-semya",
+            "description": "Освежающий сок с фруктовым вкусом",
+            "price": "150.00",
+            "discount": "12.00",
+            "discount_price": 132,
+            "image": "products/juice1.png",
+            "is_active": true,
+            "delivered": null,
+            "energy_value": "",
+            "weight": null
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 4,
+        "fields": {
+            "category": 1,
+            "name": "Хлеб серый",
+            "quantity": 1,
+            "slug": "hleb-seryj",
+            "description": "Свежий выпеченый хлеб , что еще сказать то",
+            "price": "2.15",
+            "discount": null,
+            "discount_price": 0,
+            "image": "products/bread2.png",
+            "is_active": true,
+            "delivered": null,
+            "energy_value": "Нутриент\tКоличество\t% от нормы в 100 г\r\nКалорийность\t245.1 ккал\t14.6%\r\nБелки\t                7.9 г\t                 10.4%\r\nЖиры\t                1.1 г\t                   2%\r\nУглеводы\t         51 г\t                   23.3%",
+            "weight": null
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 5,
+        "fields": {
+            "category": 8,
+            "name": "Сидр",
+            "quantity": 1,
+            "slug": "sidr",
+            "description": "светлый легкий яблочный сидр поможет освежиться в знойный день",
+            "price": "3.15",
+            "discount": "10.00",
+            "discount_price": 2,
+            "image": "products/sidr.png",
+            "is_active": true,
+            "delivered": "2025-04-08",
+            "energy_value": "",
+            "weight": null
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 6,
+        "fields": {
+            "category": 13,
+            "name": "Сыр Гауда",
+            "quantity": 20,
+            "slug": "syr-gauda",
+            "description": "вкусный качественный и галантный сыр",
+            "price": "200.00",
+            "discount": "10.00",
+            "discount_price": 180,
+            "image": "products/cheese_2.jfif",
+            "is_active": true,
+            "delivered": "2025-04-12",
+            "energy_value": "",
+            "weight": null
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 7,
+        "fields": {
+            "category": 9,
+            "name": "Хортица",
+            "quantity": 10,
+            "slug": "hortica",
+            "description": "Хорошо пьется",
+            "price": "750.00",
+            "discount": null,
+            "discount_price": 0,
+            "image": "products/vodka.jpg",
+            "is_active": true,
+            "delivered": "2025-04-16",
+            "energy_value": "",
+            "weight": null
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 8,
+        "fields": {
+            "category": 9,
+            "name": "Абсент",
+            "quantity": 7,
+            "slug": "absent",
+            "description": "Полный отвал башки и печени скорее всего, рекомендуется любителям эвтаназии",
+            "price": "2000.00",
+            "discount": "10.00",
+            "discount_price": 1800,
+            "image": "products/absent.jpeg",
+            "is_active": true,
+            "delivered": "2025-04-16",
+            "energy_value": "",
+            "weight": null
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 9,
+        "fields": {
+            "category": 9,
+            "name": "Jack Daniels",
+            "quantity": 25,
+            "slug": "jack-daniels",
+            "description": "Хороший, выдержанный виски для истинных ценителей",
+            "price": "1700.00",
+            "discount": "5.00",
+            "discount_price": 1615,
+            "image": "products/viski.jpg",
+            "is_active": true,
+            "delivered": "2025-04-16",
+            "energy_value": "",
+            "weight": null
+        }
+    }
+]

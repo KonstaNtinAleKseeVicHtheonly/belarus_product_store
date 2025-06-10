@@ -1,0 +1,119 @@
+{% extends "products/base.html"%}
+{%load static%}
+{%load cache%}
+
+{%block title%}
+{{title}}
+{%endblock%}
+{%block content%}
+<!-- Контент -->
+        <div class="container">
+            <div class="row mt-1">
+                <div class="col-lg-10">
+                    <!-- Контент на странице -->
+                    <div class="row">
+                        <div class="container mt-5">
+                            <div class="row">
+                                <!-- Профиль с данными пользователя -->
+                                <div class="col-md-5">
+                                    <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
+                                        <h3 class="text-center mb-4">Профиль пользователя {{user.username}}</h3>
+                                        <form action="{%url 'all_users:current_profile'%}" method='post' enctype="multipart/form-data">
+                                            <div class="col-md-12 mb-3 text-center">
+                                                <label for="{{form.image.id_for_label}}" class="form-label">Ваш профиль</label>
+                                                <img src="{%if user.image%}{{user.image.url}}{%else%}{%static 'deps/images/baseavatar.jpg'%}{%endif%}"
+                                                    alt="Аватар пользователя" class="img-fluid rounded-circle";>
+                                            </div>
+                                            {%if form.image.errors%}
+                                                        <div class="alert alert-danger alert-dismissible fade show custom-shadow" role="alert">{{form.image.errors}}</div>
+                                            {%endif%}
+                                            {%csrf_token%}
+                                            <div class="row">
+                                                {%for attr in form%}
+                                                    {%if attr.id_for_label != id_password%}
+                                                        <div class="col-md-12 mb-3">
+                                                            <label for="{{attr.id_for_label}}" class="form-label">{{attr.label}}</label>
+                                                            {{attr}}
+                                                        </div>
+                                                        {%if attr.errors%}
+                                                        <div class="alert alert-danger alert-dismissible fade show custom-shadow" role="alert">{{attr.errors}}</div>
+                                                        {%endif%}
+                                                    {%endif%}
+                                                {%endfor%}
+                                            </div>
+                                            <button type="submit" class="btn btn-dark">Сохранить</button>
+                                        </form>
+                                    </div>
+                                </div> 
+                                <!-- Корзина -->
+                                        <div class="col-md-7">
+                                            <div class="bg-white p-4 mb-4 mx-2 rounded custom-shadow">
+                                                <h3 class="text-center mb-4">Корзина</h3>
+                                                <div class="container" id="cart-items-container">
+                                                    <!-- Разметка корзины -->
+                                                    {%include 'carts/includes/included_cart.html'%}
+                                                    <!-- Закончилась разметка корзины -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                <!-- Оформленные заказы -->
+                                {% comment %} {%cache 60 user_orders user.id%} {% endcomment %}
+                                 <div class="col-md-12">
+                                <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
+                                    <h3 class="text-center mb-4">Мои заказы</h3>
+                                    <!-- Разметка заказов -->
+                                    <div class="container">
+                                        <div class="accordion" id="accordionExample">
+                                            {%if orders.exists%}
+                                                {% for order in orders %}
+                                                        {%if order.created_timestamp%}
+                                                            <div class="accordion-item">
+                                                                <h2 class="accordion-header" id="heading{{ order.id }}">
+                                                                    <button class="accordion-button {% if order != orders.0 %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ order.id }}" aria-expanded="false" aria-controls="collapse{{ order.id }}">
+                                                                        Заказ № {{ order.id }} - {{ order.created_timestamp }} | Статус: <strong class="mx-2">{{order.status}}</strong>
+                                                                    </button>
+                                                                </h2>
+                                                                <div id="collapse{{ order.id }}" class="accordion-collapse collapse {% if order == orders.0 %}show{% endif %}" aria-labelledby="heading{{ order.id }}" data-bs-parent="#accordionExample">
+                                                                    <div class="accordion-body">
+                                                                        <table class="table table-dark table-hover">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Товар</th>
+                                                                                    <th>Количество</th>
+                                                                                    <th>Цена</th>
+                                                                                    <th>Общая стоимость</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                {% for item in order.order_items.all %}
+                                                                                    {%if item.product_price%}
+                                                                                        <tr>
+                                                                                            <td><a class="text-white" href="{% url 'all_products:current_product' item.product.slug %}">{{ item.product.name }}</a></td>
+                                                                                            <td>{{ item.quantity }}</td>
+                                                                                            <td>{{ item.price }}</td>
+                                                                                            <td>{{ item.total_price }}</td>
+                                                                                        </tr>
+                                                                                    {%endif%}
+                                                                                {% endfor %}
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {%endif%}
+                                                {% endfor %}
+                                            {%else%}
+                                              <h2><font color=blue>В данный момент у вас нет заказов.</h2>
+                                            {%endif%}
+                                        </div>
+                                    </div>
+                                    </div>
+                                {% comment %} {%endcache%} {% endcomment %}
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{%endblock%}

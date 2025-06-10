@@ -1,0 +1,167 @@
+{%extends 'products/base.html'%}
+{%load static%}
+{% load mptt_tags %}
+{%load products_tags%}
+
+{%block title%}
+    {{title}}
+{%endblock%}
+
+{%block css%}
+    <link rel="stylesheet" href="{%static 'deps/css/my_footer_css.css'%}">
+{%endblock%}
+
+{%block modal_cart%}
+    {%include 'carts/includes/cart_button.html'%}
+{%endblock%}
+
+{%block content%}
+<!-- Форма фильтров -->
+{%if current_category%}
+    <div class="dropdown mb-2">
+        <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Фильтры
+        </button>
+        <form action="{%if request.GET.q%}{%url 'all_products:search'%}{%else%}{%url 'all_products:subcategories' current_category.slug%}{%endif%}" method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
+            <div class="form-check text-white mx-3">
+                <input class="form-check-input" type="checkbox" name="on_sale" id="flexCheckDefault" value="on"  {%if request.GET.on_sale%}checked{%endif%}>
+                {%if request.GET.q%}
+                <input type="hidden" name="q" value="{{request.GET.q}}">
+                {%endif%}
+                <label class="form-check-label" for="flexCheckDefault">
+                    Товары по акции
+                </label>
+            </div>
+            <p class="text-white mx-3 mt-3">Сортировать:</p>
+            <div class="form-check text-white mx-3">
+                <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault1" value="default" {%if request.GET.order_by or not request.GET.order_by%}checked{%endif%}>
+                <label class="form-check-label" for="flexRadioDefault1">
+                    По умолчанию
+                </label>
+            </div>
+            <div class="form-check text-white mx-3">
+                <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault2" value="price" {%if request.GET.order_by == 'price'%}checked{%endif%}>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    От дешевых к дорогим
+                </label>
+            </div>
+            <div class="form-check text-white mx-3">
+                <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault3" value="-price"{%if request.GET.order_by == '-price'%}checked{%endif%}>
+                <label class="form-check-label" for="flexRadioDefault3">
+                    От дорогих к дешевым
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
+        </form>
+{%endif%}
+</div>
+    <div class="container">
+        <!-- Хлебные крошки -->
+        {% if breadcrumbs %}
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'main_page' %}">Главная</a>
+                </li>
+                {% for ancestor in breadcrumbs %}
+                <li class="breadcrumb-item">
+                    <a href="{% url 'all_products:subcategories' ancestor.slug %}">
+                        {{ ancestor.name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ol>
+        </nav>
+        {% endif %}
+            <!-- Основное содержимое -->
+<div class="col-md-9">
+    {% if current_category %}
+        <h1>{{ current_category.name }}</h1>
+        
+        {% if subcategories %}
+        <!-- Режим конечной категории - только товары -->
+            {% if current_category.is_leaf_node %}
+                <!-- отобразит все товары данной подкатегории -->
+                {%include 'includes/products.html'%}
+            {% else %}
+                <!-- Режим с подкатегориями -->
+                <div class="subcategories mb-4">
+                    <h3>Подкатегории</h3>
+                    <div class="row">
+                        {% for category in subcategories %}
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <a href="{{ category.get_absolute_url }}" class="text-decoration-none d-flex flex-column h-100">
+                                    <div>
+                                        <img src="{{ category.image.url }}"  
+                                            alt="{{ category.name }}"
+                                            style="height: 200px; object-fit: contain; padding: 10px; background: #f8f9fa;">
+                                    </div>
+                                    <div class="card-body d-flex align-items-center">
+                                        <h5 class="card-title text-dark mb-0 text-center w-100">{{ category.name|upper }}</h5>
+                                    </div>
+                                    <div class="card-body d-flex align-items-center">
+                                        <h5 class="card-title text-dark mb-0 text-center w-100">{{ category.description|truncatechars:50 }}</h5>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- Товары всех подкатегорий -->
+                {%include 'includes/products.html'%}
+            {% endif %}
+
+        {% endif %}
+    {%else%}
+        <!-- Результат поиска по панели поиска  -->
+        {% include "includes/search_result.html" %}
+    {% endif %}
+</div>
+                    
+                <!-- Пагинация -->
+                {%if subcategories%}
+                    {% if page_obj.paginator.num_pages > 1 %}
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center mt-4">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?{%change_params page=page_obj.previous_page_number %" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                    <li class="page-item active"><a class="page-link" href="?{%change_params page=num%}">{{ num }}</a></li>
+                                {% else %}
+                                    <li class="page-item"><a class="page-link" href="?{%change_params page=num%}">{{ num }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?{%change_params page=page_obj.next_page_number %}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                {%endif%}
+            </div>
+            
+        </div>
+    </div>
+{%endblock%}
+{%block footer%}
+<footer class="py-4 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Bar | Kostyan Production</p>
+    </div>
+</footer>
+{%endblock%}

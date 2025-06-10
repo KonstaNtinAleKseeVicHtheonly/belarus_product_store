@@ -1,0 +1,50 @@
+{%extends 'products/base.html'%}
+{%load static%}
+{% load mptt_tags %}
+{%block title%}
+{{title}}
+{%endblock%}
+{%block css%}
+<link rel="stylesheet" href="{%static 'deps/css/my_footer_css.css'%}">
+{%endblock%}
+
+{%block modal_cart%}
+    {%include 'carts/includes/cart_button.html'%}
+{%endblock%}
+
+{%block content%}
+    <section>
+        <!-- Контент -->
+        <div class="container">
+            <div class="row mt-1">
+                <div class="col-lg-2">
+                    <!-- Пустой блок на Ваше усмотрение -->
+                </div>
+                <div class="col-lg-10 d-flex flex-column align-items-center justify-content-center text-center">
+                    <!-- Контент на странице -->
+                    <div class="my-5">
+                        <h1 class="display-4 fw-bold text-dark">{{main_info}}</h1>
+                    </div>
+                    
+                    <div class="my-4">
+                        <a href="{% url 'all_products:products_catalog' %}" class="btn btn-danger btn-lg px-5 py-3 fs-3">
+                            К покупкам
+                        </a>
+                    </div>
+                
+                    <div class="my-5 p-4 bg-light border-start border-end border-5 border-primary rounded-3 shadow-sm w-75">
+                        <h2 class="fs-1 fw-bold text-dark">Цитата дня:</h2>
+                        <p class="fs-3 fst-italic text-muted mt-3">"{{quote}}"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{%endblock%}
+{%block footer%}
+<footer class="py-4 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Bar &copy; Kostyan production 2025 </p>
+    </div>
+</footer>
+{%endblock%}

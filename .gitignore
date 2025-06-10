@@ -1,0 +1,38 @@
+# Файлы окружения
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Виртуальное окружение
+venv/
+env/
+ENV/
+virtualenv/
+
+#python stuff
+cache/
+# Файлы pytest
+.pytest_cache/
+
+# Файлы IDE
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Временные файлы и каталоги
+*.swp
+*.bak
+*.tmp
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+
+# изображения для сайта
+media/

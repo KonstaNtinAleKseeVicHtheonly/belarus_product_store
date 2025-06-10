@@ -1,0 +1,148 @@
+{%extends 'products/base.html'%}
+{%load static%}
+{%load humanize%}
+
+
+{%block title%}
+    {{title}}
+{%endblock%}
+{%block css%}
+<link rel="stylesheet" href="{%static 'deps/css/my_footer_css.css'%}">
+
+{%endblock%}
+{%block modal_cart%}
+    {%include 'carts/includes/cart_button.html'%}
+{%endblock%}
+
+
+{%block content%}
+    <div class="row">
+    <!-- Фотография товара -->
+    <div class="col-lg-6 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-img-container p-3 text-center" style="background-color: black; min-height: 100px;">
+                {%if current_product.image%}
+                <img src="{{ current_product.image.url }}" 
+                    class="img-fluid rounded" 
+                    alt="{{ current_product.name }}"
+                    style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                {%else%}
+                <img src="{%static 'deps/images/goods/default_product.jpg'%}" style = "max-height: 100%; max-width: 100%; object-fit: contain;">
+                {%endif%}
+            </div>
+        </div>
+    </div>
+    <!-- Информация о товаре -->
+    <div class="col-lg-6 mb-4">
+    <div class="card border-0 h-100">
+        <div class="card-body">
+            <!-- Название -->
+            <h1 class="card-title mb-3">{{ current_product.name }}</h1>
+            <!-- Цена -->
+            {% if current_product.discount %}
+                <p class="card-text">
+                    <span class="badge bg-warning text-dark">Скидка {{ current_product.discount }}%</span>
+                    <span class="text-danger fs-5">{{current_product.calculate_sell_price }} ₽</span>
+                    <small class="text-muted text-decoration-line-through ms-2">{{ current_product.price }} ₽</small>
+                </p>
+            {% else %}
+                <p class="card-text fs-5">{{ current_product.calculate_sell_price }} ₽</p>
+            {% endif %}
+
+            <!-- Описание -->
+            <div class="mb-4">
+                <h3 class="h4 text-muted mb-2">Описание</h3>
+                <p class="fs-5">{{ current_product.description }}</p>
+            </div>
+
+            <!-- таблица энергетической ценности -->
+            <div class="product-specs mb-4">
+                <h3 class="h4 text-muted mb-3">Характеристики</h3>
+                <div class="nutrition-facts mt-4">
+                    <h3 class="h4 mb-3">Пищевая ценность на 100 г</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered nutrition-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th name='first_column'>Нутриент</th>
+                                    <th name = 'second_column' class="text-end">Количество</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if current_product.energy_value %}
+                                    {% with nutrients=current_product.energy_value.split %}
+                                        <tr>
+                                            <td>Белки</td>
+                                            <td class="text-end">{{ nutrients.0 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Жиры</td>
+                                            <td class="text-end">{{ nutrients.1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Углеводы</td>
+                                            <td class="text-end">{{ nutrients.2 }}</td>
+                                        </tr>
+                                        {% if nutrients|length > 3 %}
+                                        <tr>
+                                            <td>Калории</td>
+                                            <td class="text-end">{{ nutrients.3 }}</td>
+                                        </tr>
+                                        {% endif %}
+                                    {% endwith %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="2" class="text-center text-muted">
+                                            Данные отсутствуют
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+                    <li class="mb-2">
+                        <span class="text-muted">Вес:</span> 
+                        <strong>{{ current_product.weight }} г</strong>
+                    </li>
+                    {%if current_product.quantity > 0%}
+                        <li>
+                            <span class="text-muted">Осталось:</span> 
+                            {%if current_product.quantity > 5%}
+                                <strong>{{ current_product.quantity }} шт.</strong>
+                            {%else%}
+                                <strong color=red>{{ current_product.quantity }} шт.</strong>
+                            {%endif%}
+                        </li>
+                    {%else%}
+                        <strong color=red> Товара нет в наличии</strong>
+                    {%endif%}
+                </ul>
+            </div>
+
+            <!-- Кнопки действий -->
+            <div class="d-grid gap-3 d-md-flex mt-auto">
+                <a href="{% url 'all_carts:cart_add'%}" class="btn add-to-cart"
+                data-product-id="{{current_product.id}}">
+                <img class="mx-1" src="{%static 'deps/icons/basket2-fill.svg'%}" alt="Catalog Icon" width="24"
+                        height="24">Добавить в корзину
+                </a>
+                {% csrf_token %}
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+{%endblock%} 
+
+<!-- Мб удалить если будет мешать основному контенту-->
+{%block footer%}
+<footer class="py-4 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Bar &copy; Kostyan production 2025 </p>
+    </div>
+{%endblock%}

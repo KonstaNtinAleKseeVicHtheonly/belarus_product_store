@@ -1,0 +1,210 @@
+[
+    {
+        "model": "products.productcategory",
+        "pk": 1,
+        "fields": {
+            "name": "Хлеб и выпечка",
+            "slug": "hleb-i-vypechka",
+            "parent": null,
+            "image": "category_images/bread.jfif",
+            "description": "Хлебобулочные изделия, выпечка и прочее",
+            "is_active": true,
+            "lft": 1,
+            "rght": 4,
+            "tree_id": 6,
+            "level": 0
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 2,
+        "fields": {
+            "name": "Вода и напитки",
+            "slug": "voda-i-napitki",
+            "parent": null,
+            "image": "category_images/drinks.jfif",
+            "description": "чай кофе соки воды алкоголь",
+            "is_active": true,
+            "lft": 1,
+            "rght": 14,
+            "tree_id": 1,
+            "level": 0
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 3,
+        "fields": {
+            "name": "Мясо, птица, колбасы",
+            "slug": "myaso-ptica-kolbasy",
+            "parent": null,
+            "image": "category_images/kolbasy-k-NG.jpg",
+            "description": "Все виды мяса, вяленое, сушеное, маринованое, колбасы всех сортов",
+            "is_active": true,
+            "lft": 1,
+            "rght": 4,
+            "tree_id": 3,
+            "level": 0
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 4,
+        "fields": {
+            "name": "Вода",
+            "slug": "voda",
+            "parent": 2,
+            "image": "category_images/water.jfif",
+            "description": "газированная, минеральная воды всех объемов",
+            "is_active": true,
+            "lft": 8,
+            "rght": 9,
+            "tree_id": 1,
+            "level": 1
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 5,
+        "fields": {
+            "name": "Газировка",
+            "slug": "gazirovka",
+            "parent": 2,
+            "image": "category_images/fizzy_drinks.jfif",
+            "description": "Лимонады всех видов",
+            "is_active": true,
+            "lft": 10,
+            "rght": 11,
+            "tree_id": 1,
+            "level": 1
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 6,
+        "fields": {
+            "name": "Соки, морсы",
+            "slug": "soki-morsy",
+            "parent": 2,
+            "image": "category_images/juice.jfif",
+            "description": "Соки и морсы, логично же",
+            "is_active": true,
+            "lft": 12,
+            "rght": 13,
+            "tree_id": 1,
+            "level": 1
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 7,
+        "fields": {
+            "name": "Алкоголь",
+            "slug": "alcohol",
+            "parent": 2,
+            "image": "category_images/alcohol.jfif",
+            "description": "Крепкое спиртное, легкоалкогольные напитки, шампанское и прочее",
+            "is_active": true,
+            "lft": 2,
+            "rght": 7,
+            "tree_id": 1,
+            "level": 1
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 8,
+        "fields": {
+            "name": "Легкоалкогольные напитки",
+            "slug": "legkoalkogolnye-napitki",
+            "parent": 7,
+            "image": "category_images/light_alco.jfif",
+            "description": "Пиво, сидры, газированные алкогольные напитки",
+            "is_active": true,
+            "lft": 5,
+            "rght": 6,
+            "tree_id": 1,
+            "level": 2
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 9,
+        "fields": {
+            "name": "крепкое спиртное",
+            "slug": "krepkoe-spirtnoe",
+            "parent": 7,
+            "image": "category_images/vodka.jfif",
+            "description": "высокоградусный, крепкий алкоголь",
+            "is_active": true,
+            "lft": 3,
+            "rght": 4,
+            "tree_id": 1,
+            "level": 2
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 10,
+        "fields": {
+            "name": "свежее мясо",
+            "slug": "svezhee-myaso",
+            "parent": 3,
+            "image": "category_images/fresh_meat.jfif",
+            "description": "Широкий ассортимент свежего мясо любых видов",
+            "is_active": true,
+            "lft": 2,
+            "rght": 3,
+            "tree_id": 3,
+            "level": 1
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 11,
+        "fields": {
+            "name": "свежая выпечка",
+            "slug": "svezhaya-vypechka",
+            "parent": 1,
+            "image": "category_images/bakery.png",
+            "description": "Пирожки, печенья и прочее прямо из духовки",
+            "is_active": true,
+            "lft": 2,
+            "rght": 3,
+            "tree_id": 6,
+            "level": 1
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 12,
+        "fields": {
+            "name": "рыба и морепродукты",
+            "slug": "ryba-i-moreprodukty",
+            "parent": null,
+            "image": "category_images/seaproducts_Wj2Ph8x.png",
+            "description": "Широкий ассортимент полезных свежих и маринованных морепродуктов, свежей и мороженной рыбы на любой вкус",
+            "is_active": true,
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 4,
+            "level": 0
+        }
+    },
+    {
+        "model": "products.productcategory",
+        "pk": 13,
+        "fields": {
+            "name": "молочная продукция",
+            "slug": "molochnaya-produkciya",
+            "parent": null,
+            "image": "category_images/dairy.jfif",
+            "description": "Молоко, кефир, масло, сыры",
+            "is_active": true,
+            "lft": 1,
+            "rght": 2,
+            "tree_id": 2,
+            "level": 0
+        }
+    }
+]

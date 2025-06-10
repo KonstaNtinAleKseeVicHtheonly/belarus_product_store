@@ -1,0 +1,171 @@
+.pyaterochka-banner {
+    background: linear-gradient(rgba(226, 0, 26, 0.9), rgba(226, 0, 26, 0.95)),
+    url('{% static "deps/images/pyaterochka-pattern.png" %}');
+    background-size: cover;
+    padding: 60px 0;
+}
+
+.fact-card {
+    transition: transform 0.3s ease;
+}
+
+.fact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.principle-icon i {
+    transition: transform 0.3s ease;
+}
+
+.card:hover .principle-icon i {
+    transform: scale(1.1);
+}
+
+.btn-danger {
+    background-color: #e2001a;
+    border-color: #e2001a;
+}
+
+.btn-outline-danger {
+    color: #e2001a;
+    border-color: #e2001a;
+}
+
+.btn-outline-danger:hover {
+    background-color: #e2001a;
+    color: white;
+}
+
+/* Обрамление истории магазина */
+
+.company-history-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f9f9f9 0%, #f0f3ff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.company-history-section::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(226, 0, 26, 0.05);
+    border-radius: 50%;
+}
+
+.company-history-section::after {
+    content: "";
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background: rgba(226, 0, 26, 0.03);
+    border-radius: 50%;
+}
+
+.history-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.history-content {
+    background: white;
+    border-radius: 20px;
+    padding: 50px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(226, 0, 26, 0.1);
+    transform: translateY(0);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.history-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+.history-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.history-title {
+    font-size: 2.5rem;
+    color: #e2001a;
+    font-weight: 700;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.title-decoration {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #e2001a, #ff6b6b);
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+.history-text {
+    margin-bottom: 40px;
+}
+
+.history-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.history-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(226, 0, 26, 0.03);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    background: rgba(226, 0, 26, 0.08);
+    transform: translateX(5px);
+}
+
+.feature-icon {
+    font-size: 1.3rem;
+    color: #e2001a;
+    margin-right: 15px;
+}
+
+.feature-item span {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .history-content {
+        padding: 30px;
+    }
+
+    .history-title {
+        font-size: 2rem;
+    }
+
+    .history-features {
+        grid-template-columns: 1fr;
+    }
+}

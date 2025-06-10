@@ -1,0 +1,165 @@
+{%extends 'products/base.html'%}
+{%load static%}
+{%block css%}
+<link rel="stylesheet" href="{%static 'deps/css/extra_staff.css'%}">
+{%endblock%}
+
+{%block title%}
+    {{title}}
+{%endblock%}
+
+{% block content %}
+<div class="team-page">
+    <!-- Хедер с анимированным заголовком -->
+    <header class="team-header text-center py-5" style="background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3" style="color: #2c3e50;">Наша команда</h1>
+            <p class="lead" style="color: #7f8c8d;">Профессионалы, которые сделают ваши покупки приятными</p>
+        </div>
+    </header>
+
+    <!-- Блок директора -->
+    <section class="director-section py-5" style="background: #f8f9fa;">
+        <div class="container">
+            <div class="director-card animate__animated animate__fadeIn" style="background: linear-gradient(to right, #ffffff 0%, #f5f9ff 100%);">
+                <div class="director-badge" style="background: linear-gradient(45deg, #3a7bd5, #5b9bf5);">Директор магазина</div>
+                <div class="row g-0 align-items-center">
+                    <div class="col-lg-4 director-photo">
+                        {% if director.image %}
+                        <img src="{{ director.image.url }}" class="img-fluid" alt="{{ director.get_full_name }}">
+                        {% else %}
+                        <img src="{% static 'deps/images/team/director.jpg' %}" class="img-fluid" alt="Директор">
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="director-info p-4 p-lg-5">
+                            <h2 class="director-name" style="color: #2c3e50;">{{ director.get_full_name }}</h2>
+                            <div class="director-meta mb-4">
+                                <span class="experience" style="color: #3a7bd5;"><i class="bi bi-award"></i> Опыт: 20 лет</span>
+                                <span class="divider">|</span>
+                                <span class="position" style="color: #5b9bf5;">{{ director.position|default:"Руководитель" }}</span>
+                            </div>
+                            <p class="director-description" style="color: #555;">{{ director.description|default:"Стратегическое видение и лидерские качества позволяют создавать лучшие условия для наших клиентов и сотрудников." }}</p>
+                            <div class="director-contacts mt-4">
+                                <h2>Контактные данные:</h2>
+                                    {% if director.phone_number %}
+                                        Номер телефона : {{director.phone_number}}
+                                    <a href="tel:{{ director.phone_number }}" class="btn btn-outline-light btn-sm me-2">
+                                        <i class="bi bi-telephone me-1"></i> Позвонить
+                                    </a>
+                                    {% endif %}
+                                    <br>
+                                    {% if director.email %}
+                                    Электронная почта {{director.email}}
+                                    <a href="mailto:{{ director.email }}" class="btn btn-outline-light btn-sm">
+                                        <i class="bi bi-envelope me-1"></i> Написать
+                                    </a>
+                                    {% endif %}
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Блок сотрудников -->
+    <section class="team-section py-5" style="background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);">
+        <div class="container">
+            <h2 class="section-title text-center mb-5" style="color: #2c3e50;">Наши специалисты</h2>
+            
+            <div class="row g-4">
+                {% for employee in employees %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="team-card animate__animated animate__fadeInUp" data-delay="{{ forloop.counter0|add:1 }}" style="background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%);">
+                        <div class="card-inner">
+                            <div class="team-photo">
+                                {% if employee.image %}
+                                <img src="{{ employee.image.url }}" class="img-fluid" alt="{{ employee.get_full_name }}">
+                                {% else %}
+                                <img src="{% static 'deps/images/team/employee.jpg' %}" class="img-fluid" alt="Сотрудник">
+                                {% endif %}
+                                <div class="photo-overlay" style="background: linear-gradient(to top, rgba(91, 155, 245, 0.7), transparent);"></div>
+                            </div>
+                            
+                            <div class="team-info">
+                                <h3 class="team-name" style="color: #2c3e50;">{{ employee.get_full_name }}</h3>
+                                <p class="team-position" style="color: #5b9bf5;">{{ employee.position|default:"Специалист" }}</p>
+                                
+                                <div class="team-description">
+                                    <p style="color: #7f8c8d;">{{ employee.description|default:"Квалифицированный специалист с индивидуальным подходом к каждому клиенту."|truncatewords:20 }}</p>
+                                </div>
+                                
+                                <div class="team-meta">
+                                    <span class="experience" style="color: #95a5a6;"><i class="bi bi-briefcase" style="color: #5b9bf5;"></i> {{ employee.id }} лет опыта</span>
+                                </div>
+                                
+                                <div class="team-contacts mt-3">
+                                    <h2>Контактные данные:</h2>
+                                    {% if employee.phone_number %}
+                                        Номер телефона : {{employee.phone_number}}
+                                    <a href="tel:{{ employee.phone_number }}" class="btn btn-outline-light btn-sm me-2">
+                                        <i class="bi bi-telephone me-1"></i> Позвонить
+                                    </a>
+                                    {% endif %}
+                                    <br>
+                                    {% if employee.email %}
+                                    Электронная почта {{employee.email}}
+                                    <a href="mailto:{{employee.email }}" class="btn btn-outline-light btn-sm">
+                                        <i class="bi bi-envelope me-1"></i> Написать
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Пагинация здесь -->
+{% if page_obj.paginator.num_pages > 1 %}
+  <div class="pagination-container">
+    <div class="pagination">
+      {% if page_obj.has_previous %}
+        <a href="?page=1" class="pagination-arrow first-page" title="Первая страница">
+          &laquo;
+        </a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="pagination-arrow prev-page" title="Предыдущая">
+          &lsaquo;
+        </a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <span class="current-page">{{ num }}</span>
+        {% else %}
+          {% if num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}" class="page-number">{{ num }}</a>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="pagination-arrow next-page" title="Следующая">
+          &rsaquo;
+        </a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-arrow last-page" title="Последняя страница">
+          &raquo;
+        </a>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+{% endblock %}
+
+
+{%block footer%}
+<footer class="py-4 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Bar &copy; Kostyan production 2025 </p>
+    </div>
+{%endblock%}

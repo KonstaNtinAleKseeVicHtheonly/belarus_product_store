@@ -1,0 +1,208 @@
+{%extends 'products/base.html'%}
+{%load static%}
+
+
+карта
+{%block title%}
+{{title}}
+{%endblock%}
+{%block modal_cart%}
+    {%include 'carts/includes/cart_button.html'%}
+{%endblock%}
+{%block css%}
+    <link rel="stylesheet" href="{%static 'deps/css/about_css.css'%}">
+    <link rel="stylesheet" href="{% static "deps/css/bootstrap/bootstrap.min.css" %}">
+{%endblock%}
+{%block content%}
+ <div class="pyaterochka-about-page">
+    <!-- Баннер с логотипом -->
+    <section class="pyaterochka-banner" style="background-color: #e2001a; color: white;">
+        <div class="container py-5 text-center">
+            <h1 class="display-4 fw-bold mb-3">О компании</h1>
+            <p class="lead mb-0">Мы работаем, чтобы вы могли покупать качественные продукты по доступным ценам</p>
+        </div>
+    </section>
+
+    <!-- Основной контент -->
+    <div class="container py-5">
+        <!-- Блок с цифрами -->
+        <section class="pyaterochka-facts mb-5">
+            <div class="row g-4 text-center">
+                <div class="col-md-3">
+                    <div class="fact-card p-4 rounded" style="background-color: #f8f8f8;">
+                        <p class="mb-0">Лучший магазин в Озеречье</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="fact-card p-4 rounded" style="background-color: #f8f8f8;">
+                        <h2 class="text-danger">5</h2>
+                        <p class="mb-0">сотрудников в команде</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="fact-card p-4 rounded" style="background-color: #f8f8f8;">
+                        <h2 class="text-danger">1999</h2>
+                        <p class="mb-0">год основания сети</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="fact-card p-4 rounded" style="background-color: #f8f8f8;">
+                        <h2 class="text-danger">#1</h2>
+                        <p class="mb-0">по качеству товаров и отзыву потребителей</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- История компании -->
+        <section class="company-history-section">
+            <div class="history-container">
+                <div class="history-content">
+                    <div class="history-header">
+                        <h2 class="history-title">Наша история</h2>
+                        <div class="title-decoration"></div>
+                    </div>
+                    
+                    <div class="history-text">
+                        <p>Наш магазин был основан в 1998 г., Первый магазин основанный на территории поселка Озеречье. В 2019 г. была представлена новая концепция подхода к реализации продаж, адаптированная под нужды современного потребителя, а также стартовала масштабная программа обновления ассортимента и ребрендинга.</p>
+                        <p>Данный магазин находится в юрисдикции республики Беларусь, имеет широкую сеть поставщиков и цепочку поставок.</p>
+                    </div>
+                    
+                    <div class="history-features">
+                        <div class="feature-item">
+                            <i class="bi bi-check-circle-fill feature-icon"></i>
+                            <span>Забота о клиентах</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="bi bi-check-circle-fill feature-icon"></i>
+                            <span>Ориентирование на современный рынок и его тренды</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="bi bi-check-circle-fill feature-icon"></i>
+                            <span>Удобное расположение магазина</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="bi bi-check-circle-fill feature-icon"></i>
+                            <span>Постоянное обновление ассортимента</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Принципы работы -->
+        <section class="pyaterochka-principles mb-5">
+            <h2 class="text-center mb-5" style="color: #e2001a;">Наши принципы работы</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card border-0 h-100 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="principle-icon mb-3" style="font-size: 2.5rem; color: #e2001a;">
+                                <i class="bi bi-currency-exchange"></i>
+                            </div>
+                            <h3>Доступные цены</h3>
+                            <p>Мы работаем напрямую с производителями, чтобы предложить вам лучшие цены без переплат</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 h-100 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="principle-icon mb-3" style="font-size: 2.5rem; color: #e2001a;">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                            <h3>Качество продуктов</h3>
+                            <p>Строгий контроль качества на всех этапах - от производства до полок магазина</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 h-100 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="principle-icon mb-3" style="font-size: 2.5rem; color: #e2001a;">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <h3>Удобное расположение</h3>
+                            <p>Магазины в шаговой доступности в каждом районе города</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Карта покрытия -->
+        <section class="pyaterochka-map mb-5">
+            <div class="card border-0 shadow">
+                <div class="card-body p-0">
+                    <div class="row g-0">
+                        <div class="col-lg-6 p-4">
+                            <h2 style="color: #e2001a;">География присутствия</h2>
+                            <p>Наши магазин работает по адресу "Минская область, Клецкий район, пос.Озеречье.</p>
+                            <div class="mt-4">
+                                <a href="{%url 'additional:staff'%}" class="btn btn-danger">Связаться с нами</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Вакансии -->
+    
+                <div class="col-lg-6">
+                    <div class="card h-100 border-0 shadow-sm" style="background-color: #f8f8f8;">
+                        <div class="card-body p-4">
+                            <h2 style="color: #e2001a;">Для поставщиков</h2>
+                            <p>Мы открыты к сотрудничеству с производителями и поставщиками качественных продуктов.</p>
+                            <p>Наши преимущества для партнеров:</p>
+                            <ul>
+                                <li>Постоянная баз клиентов</li>
+                                <li>Честные условия сотрудничества</li>
+                                <li>Своевременные выплаты</li>
+                            </ul>
+                            <a href="{%url 'additional:staff'%}" class="btn btn-outline-danger mt-3">Контакты для поставщиков</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{%endblock%}
+{%block footer%}
+<script>
+    // Анимация при скролле
+    document.addEventListener('DOMContentLoaded', function() {
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.fact-card, .card');
+            elements.forEach(el => {
+                const elPosition = el.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if(elPosition < screenPosition) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Инициализация
+        const elements = document.querySelectorAll('.fact-card, .card');
+        elements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Запустить сразу для видимых элементов
+    });
+</script> 
+ 
+<footer class="py-4 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Bar &copy; Kostyan production 2025 </p>
+    </div>
+</footer>
+{%endblock%}

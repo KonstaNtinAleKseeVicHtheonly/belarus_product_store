@@ -1,0 +1,62 @@
+{%load static%}
+{%load carts_tag%}
+{%user_carts request as carts%}
+<div class="card mb-3 text-bg-light shadow-lg">
+    {%for cart in carts%}
+            <div class="card-header">
+                <h5 class="card-title"><font color='blue'>{{cart.product.name}}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class="row text-center">
+                        <div class="col p-0">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-dark btn-sm decrement"
+                                        data-cart-id="{{cart.id}}" data-cart-change-url="{%url 'all_carts:cart_change'%}">
+                                        {%csrf_token%}
+                                        -
+                                    </button>
+                                </span>
+                                <input type="text" class="form-control number" value="{{cart.quantity}}"
+                                    readonly>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-dark btn-sm increment"
+                                        data-cart-id="{{cart.id}}" data-cart-change-url="{%url 'all_carts:cart_change'%}">
+                                        {%csrf_token%}
+                                        +
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col p-0">
+                            <p>x {{cart.product.calculate_sell_price}} руб. = </p>
+                        </div>
+                        <div class="col p-0"><strong>{{cart.product_price_in_cart}}руб.</strong></div>
+                        <div class="col p-0">
+                            <a href="{% url 'all_carts:cart_remove'%}" class="remove-from-cart" data-cart-id="{{cart.id}}">
+                                {%csrf_token%}
+                                Удалить
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+    {%endfor%}
+</div>
+{%if carts.first.quantity >= 1%}
+<div class="card mb-3 shadow-lg">
+    <div class="card-footer">
+        <p class="float-left">Итого <strong>{{carts.general_quantity}}</strong> товар(а) на сумму</p>
+        <h4 class="float-left"><strong>{{carts.general_sum}} руб.</strong></h4>
+    </div>
+</div>
+{%else%}
+    <h3>Нет товаров в корзине</h3>
+    <h4><a href="{%url 'all_products:products_catalog'%}">К покупкам</a></h4>
+{%endif%}
+{%if carts and title != 'Оформление заказа' and not order%}
+<a class="btn btn-dark" href="{%url 'all_orders:create_order'%}">
+    Оформить заказ
+</a>
+{%endif%}

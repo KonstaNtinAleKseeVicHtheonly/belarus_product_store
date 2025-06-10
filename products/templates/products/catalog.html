@@ -1,0 +1,121 @@
+{% extends "products/base.html" %}
+{% load static %}
+{% load mptt_tags %}
+
+
+{%block title%}
+  {{title}}
+{%endblock%}
+
+{%block modal_cart%}
+    {%include 'carts/includes/cart_button.html'%}
+{%endblock%}
+{% block content %}
+<div class="container mt-4">
+    <!-- Хлебные крошки -->
+    <nav aria-label="breadcrumb">
+        
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'main_page'%}">Главная</a></li>
+            {% for ancestor in current_category.get_ancestors %}
+                <li class="breadcrumb-item"><a href="{{ ancestor.get_absolute_url }}">{{ ancestor.name }}</a></li>
+            {% endfor %}
+            {% if current_category %}
+                <li class="breadcrumb-item active">{{ current_category.name }}</li>
+            {% endif %}
+        </ol>
+    </nav>
+    
+    <h1 class="mb-4">Все категории</h1>
+
+    {% if subcategories.exists %}
+      <div class="row">
+          {% for category in subcategories %}
+          <div class="col-md-4 mb-4">
+              <div class="card h-100 category-card shadow-sm">
+                  <!-- Основная категория -->
+                  <a href="{{ category.get_absolute_url }}" class="text-decoration-none text-dark">
+                      <div class="category-image-container" style="height: 200px; background: #f8f9fa; padding: 15px;">
+                          <img src="{{ category.image.url }}" 
+                              class="card-img-top h-100" 
+                              alt="{{ category.name }}"
+                              style="object-fit: contain; width: 100%;">
+                      </div>
+                      <div class="card-body">
+                          <h5 class="card-title">{{ category.name }}</h5>
+                          <p class="card-text text-muted small">{{ category.description|truncatechars:50 }}</p>
+                      </div>
+                  </a>
+
+                  <!-- Подкатегории -->
+                  <div class="subcategories-wrapper border-top">
+                      {% for subcat in category.get_descendants %}
+                      <a href="{% url 'all_products:subcategories' subcat.slug %}" 
+                        class="d-block p-2 subcategory-item text-decoration-none text-dark">
+                          <div class="d-flex align-items-center text-center">
+                              <div class="subcategory-image mr-2" style="width: 60px; height: 60px; flex-shrink: 0;">
+                                  <img src="{{ subcat.image.url }}" 
+                                      class="img-fluid h-100" 
+                                      alt="{{ subcat.name }}"
+                                      style="object-fit: cover; width: 100%;">
+                              </div>
+                              <h6 class="mb-0 w-100">{{ subcat.name }}</h6>
+                          </div>
+                      </a>
+                      {% endfor %}
+                  </div>
+              </div>
+          </div>
+          {% empty %}
+          <div class="col-12">
+              <div class="alert alert-info">Нет подкатегорий</div>
+          </div>
+          {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info">Подкатегории не найдены</div>
+    {% endif %}
+  </div>
+<!-- Пагинация здесь -->
+{% if page_obj.paginator.num_pages > 1 %}
+  <div class="pagination-container">
+    <div class="pagination">
+      {% if page_obj.has_previous %}
+        <a href="?page=1" class="pagination-arrow first-page" title="Первая страница">
+          &laquo;
+        </a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="pagination-arrow prev-page" title="Предыдущая">
+          &lsaquo;
+        </a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <span class="current-page">{{ num }}</span>
+        {% else %}
+          {% if num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}" class="page-number">{{ num }}</a>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="pagination-arrow next-page" title="Следующая">
+          &rsaquo;
+        </a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-arrow last-page" title="Последняя страница">
+          &raquo;
+        </a>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+{% endblock %}
+{% block footer %}
+<footer class="py-4 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Bar | Kostyan Production</p>
+    </div>
+</footer>
+{% endblock  %}
